@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  core-api:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.core
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ff_db
+
+  redis:
+    image: redis:6
